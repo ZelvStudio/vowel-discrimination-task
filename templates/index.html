@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+
+{% block head %}
+<!-- <header class="w3-container w3-center w3-teal"> -->
+<!-- 	<h1>Test Perceptif</h1> -->
+<!-- </header> -->
+{% endblock %}
+
+{% block body %}
+<div class="w3-container w3-content w3-margin-top">
+	<div class="w3-container w3-card-3 w3-paler-teal">
+		<header>
+			<h1 class="w3-text-teal"><b>Description du test</b></h1>
+		</header>
+		<p>bla bla bla</p>
+	</div>
+	<form class="w3-container w3-card-3 w3-white w3-margin-top" action="/" method="POST" accept-charset="utf-8">
+		<header class="w3-center w3-teal">
+			<h2><b>Registration</b></h2>
+		</header>
+		<p>
+		<label for="gender">Sexe:</label>
+		<select class="w3-select" name="gender" id="gender" required> 
+			<option value=-1>Non spécifié</option>
+			<option value=0>Femme</option>
+			<option value=1>Homme</option>
+		</select> <br>
+		</p>
+
+		<p>
+		<label for="age">Age:</label>
+		<input class="w3-input" type="number" id="age" name="age" min="18" max="100" step="1" value="" required><br>
+		</p>
+
+		<p>
+		<input class="w3-check" type="checkbox" id="consent" name="consent" required>
+		<label for="consent"> Je consens à fournir touuutes mes données personnelles</label><br>
+		</p>
+
+		<p>
+		<!-- Prevent implicit submission of the form -->
+		<button type="submit" disabled style="display: none" aria-hidden="true"></button>
+		<!-- ... -->
+		<input class="w3-button w3-section w3-teal w3-ripple" type="submit" value="Valider"/>
+		</p>
+	</form>
+</div>
+{% endblock %}
