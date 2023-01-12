@@ -12,9 +12,9 @@ git clone git@github.com:ZelvStudio/vowel-discrimination-task.git
 cd vowel-discrimination-task
 ```
 
-#### Set up virtualenv
+#### Set up virtualenv (optional)
 
-We use virtualenv to create an environment with controlled python package versions. This is optional.
+We use virtualenv to create an environment with controlled python package versions. 
 
 
 ```
