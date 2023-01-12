@@ -1,0 +1,22 @@
+---
+Vowels:
+  - a
+  - e
+  - i
+  - o
+  - u
+  - é
+  - è
+  - ou
+  - an
+  - on
+  - in
+DataPath: static/data/
+Trials:
+  - index: 1
+    file: a.wav
+    vowel: a
+  - index: 2
+    file: o.wav
+    vowel: o
+
