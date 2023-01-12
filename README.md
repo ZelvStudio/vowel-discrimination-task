@@ -25,4 +25,4 @@ Now create the database
 
 ```flask --app app --debug run```
 
-Open <localhost:5000> in your favorite browser
+Open [localhost:5000](http://localhost:5000) in your favorite browser
