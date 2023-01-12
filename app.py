@@ -1,7 +1,7 @@
 from flask import render_template, url_for, request, redirect, session
 
-from .config import app
-from .models import Participant, Trial
+from config import app
+from models import Participant, Trial
 
 
 # If test is already completed, the participant is redirected to the end page

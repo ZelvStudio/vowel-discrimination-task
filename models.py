@@ -1,6 +1,6 @@
 import peewee as pw
 from datetime import datetime
-from .config import db
+from config import db
 
 def create_tables():
     with db:
