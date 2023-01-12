@@ -22,7 +22,13 @@ Now create the database
 ```
 
 # Run local server in debug mode
-
+### Running server
 ```flask --app app --debug run```
 
+If this command fails and returns 
+> ModuleNotFoundError: No module named 'config'
+
+try running ```python -m flask --app app --debug run``` instead
+
+### Access the website
 Open [localhost:5000](http://localhost:5000) in your favorite browser
