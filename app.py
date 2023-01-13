@@ -1,6 +1,6 @@
 from flask import render_template, url_for, request, redirect, session
 
-from config import app
+from config import app, exp
 from models import Participant, Trial
 
 
@@ -29,9 +29,8 @@ def index():
 @app.route("/trial", methods=['POST', 'GET'])
 @check_completed
 def trial():
-    vowels = ['a','e','i','o','u','é','è','ou','an','on','in']
-    truth = 'a'
-    sound_file = url_for("static", filename=f'data/{truth}.wav')
+    trial_id, sound_file, truth, vowels = exp[0]
+    sound_file = url_for("static", filename=sound_file)
     if request.method == 'POST':
         answer = request.form['answer']
         Trial.create(participant=session["id"],truth=truth,answer=answer)

@@ -11,7 +11,7 @@ Vowels:
   - an
   - on
   - in
-DataPath: static/data/
+DataPath: data/
 Trials:
   - index: 1
     file: a.wav

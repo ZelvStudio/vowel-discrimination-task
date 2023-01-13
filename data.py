@@ -1,6 +1,6 @@
 import os
 import yaml
-from dataclasses import dataclass
+from dataclasses import dataclass, astuple
 
 # Experiment: list of Trials
 #   -> can be randomized
@@ -16,11 +16,20 @@ class Experiment:
             self.config = yaml.load(f, yaml.loader.FullLoader)
         self.vowels = self.config['Vowels']
         self.data_path = self.config['DataPath']
+        self.trials = [Trial(t['index'],
+                             os.path.join(self.data_path,t['file']),
+                             t['vowel']) 
+                       for t in self.config['Trials']]
+
+    def __getitem__(self,n):
+        return *astuple(self.trials[n]), self.vowels
+
+    def __len__(self):
+        return len(self.trials)
 
         
-# @dataclass(order=True)
-# class Trial:
-#     sort_index: int
-#     sound_file: str
-#     vowel: str
-#     possible_vowels: list = ['a','e','i','o','u','é','è','ou','an','on','in']
+@dataclass(order=True)
+class Trial:
+    sort_index: int
+    sound_file: str
+    vowel: str

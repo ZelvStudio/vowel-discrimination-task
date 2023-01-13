@@ -1,5 +1,9 @@
 from flask import Flask
+from data import Experiment
 import peewee
+
+EXPERIMENT = 'experiment.yaml'
+exp = Experiment(EXPERIMENT)
 
 DATABASE = 'instance/test.db'
 db = peewee.SqliteDatabase(DATABASE)
