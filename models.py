@@ -35,8 +35,9 @@ class Participant(BaseModel):
 
 class Trial(BaseModel):
     participant = pw.ForeignKeyField(Participant, backref='trials')
+    index = pw.IntegerField()
     truth = pw.CharField()
     answer = pw.CharField()
 
     def __repr__(self):
-        return f'<Trial> participant={self.participant}, truth={self.truth}, answer={self.answer}'
+        return f'<Trial {self.index}> participant={self.participant}, truth={self.truth}, answer={self.answer}'

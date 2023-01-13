@@ -27,11 +27,11 @@ def trial(n):
     if n < 0 or n >= len(experiment):
         abort(404)
 
-    _, sound_file, truth, vowels = experiment[n]
+    trial_index, sound_file, truth, vowels = experiment[n]
     sound_file = url_for("static", filename=sound_file)
     if request.method == 'POST':
         answer = request.form['answer']
-        Trial.create(participant=session["id"],truth=truth,answer=answer)
+        Trial.create(index=trial_index,participant=session["id"],truth=truth,answer=answer)
         next = n+1
         if next == len(experiment):
             Participant.complete(session)
