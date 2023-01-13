@@ -1,6 +1,6 @@
 from flask import render_template, url_for, request, redirect, session
 
-from config import app, exp
+from config import app, experiment
 from models import Participant, Trial
 
 
@@ -29,7 +29,7 @@ def index():
 @app.route("/trial", methods=['POST', 'GET'])
 @check_completed
 def trial():
-    trial_id, sound_file, truth, vowels = exp[0]
+    trial_id, sound_file, truth, vowels = experiment[0]
     sound_file = url_for("static", filename=sound_file)
     if request.method == 'POST':
         answer = request.form['answer']
