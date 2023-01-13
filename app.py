@@ -1,18 +1,8 @@
-from flask import render_template, url_for, request, redirect, session
+from flask import render_template, url_for, request, redirect, session, abort
 
 from config import app, experiment
 from models import Participant, Trial
 
-
-# If test is already completed, the participant is redirected to the end page
-def check_completed(func):
-    def wrapper():
-        if Participant.is_completed(session):
-            return redirect('/fin')
-        else:
-            return func()
-    wrapper.__name__ = func.__name__
-    return wrapper
 
 @app.route("/", methods=['POST', 'GET'])
 def index():
@@ -22,22 +12,34 @@ def index():
         consent = request.form['consent']
         participant = Participant.create(gender=gender, age=age, consent=consent)
         session["id"] = participant.id
-        return redirect('/trial')
+        return redirect('/trial/0')
     else:
         return render_template('index.html')
 
-@app.route("/trial", methods=['POST', 'GET'])
-@check_completed
-def trial():
-    trial_id, sound_file, truth, vowels = experiment[0]
+@app.route("/trial/<int:n>", methods=['POST', 'GET'])
+def trial(n):
+    # check the Participant is valid
+    if not "id" in session:
+        return redirect('/')
+    elif Participant.is_completed(session):
+        return redirect('/fin')
+    # check the url is valid
+    if n < 0 or n >= len(experiment):
+        abort(404)
+
+    _, sound_file, truth, vowels = experiment[n]
     sound_file = url_for("static", filename=sound_file)
     if request.method == 'POST':
         answer = request.form['answer']
         Trial.create(participant=session["id"],truth=truth,answer=answer)
-        Participant.complete(session)
-        return redirect('/fin')
+        next = n+1
+        if next == len(experiment):
+            Participant.complete(session)
+            return redirect('/fin')
+        else:
+            return redirect(f'/trial/{next}')
     else:
-        return render_template('trial.html', vowels=vowels, sound_file=sound_file)
+        return render_template('trial.html', vowels=vowels, sound_file=sound_file, n=n)
 
 @app.route("/fin")
 def fin():
