@@ -14,10 +14,11 @@ from dataclasses import dataclass, astuple
 class Experiment:
     def __init__(self,yaml_config):
         with open(yaml_config) as f:
-            self.config = yaml.load(f, yaml.loader.FullLoader)
+            self.config = yaml.load(f, yaml.loader.BaseLoader)
+            # we use BaseLoader otherwise 'on' vowel is loaded as True
         self.vowels = self.config['Vowels']
         self.data_path = self.config['DataPath']
-        self.sample_size = self.config['Sample']
+        self.sample_size = int(self.config['Sample'])
         self.trials = [Trial(n,
                              os.path.join(self.data_path,t['file']),
                              t['vowel']) 
