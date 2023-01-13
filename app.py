@@ -12,6 +12,7 @@ def index():
         consent = request.form['consent']
         participant = Participant.create(gender=gender, age=age, consent=consent)
         session["id"] = participant.id
+        session["permutation"] = experiment.randomize()
         return redirect('/trial/0')
     else:
         return render_template('index.html')
@@ -27,13 +28,14 @@ def trial(n):
     if n < 0 or n >= len(experiment):
         abort(404)
 
-    trial_index, sound_file, truth, vowels = experiment[n]
+    permutation = session["permutation"]
+    trial_index, sound_file, truth, vowels = experiment[permutation[n]]
     sound_file = url_for("static", filename=sound_file)
     if request.method == 'POST':
         answer = request.form['answer']
         Trial.create(index=trial_index,participant=session["id"],truth=truth,answer=answer)
         next = n+1
-        if next == len(experiment):
+        if next == len(permutation):
             Participant.complete(session)
             return redirect('/fin')
         else:

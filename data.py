@@ -1,5 +1,6 @@
 import os
 import yaml
+from random import sample
 from dataclasses import dataclass, astuple
 
 # Experiment: list of Trials
@@ -16,10 +17,15 @@ class Experiment:
             self.config = yaml.load(f, yaml.loader.FullLoader)
         self.vowels = self.config['Vowels']
         self.data_path = self.config['DataPath']
-        self.trials = [Trial(t['index'],
+        self.sample_size = self.config['Sample']
+        self.trials = [Trial(n,
                              os.path.join(self.data_path,t['file']),
                              t['vowel']) 
-                       for t in self.config['Trials']]
+                       for n,t in enumerate(self.config['Trials'])]
+
+    def randomize(self):
+        k = min(self.sample_size, len(self))
+        return [t.sort_index for t in sample(self.trials,k)]
 
     def __getitem__(self,n):
         return *astuple(self.trials[n]), self.vowels

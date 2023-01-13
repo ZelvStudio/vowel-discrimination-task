@@ -11,12 +11,11 @@ Vowels:
   - an
   - on
   - in
-DataPath: data/
+DataPath: data/ # relative path in static/ folder
+Sample: 2 # number of trials per participant
 Trials:
-  - index: 1
-    file: a.wav
+  - file: a.wav
     vowel: a
-  - index: 2
-    file: o.wav
+  - file: o.wav
     vowel: o
 
