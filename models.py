@@ -11,16 +11,29 @@ class BaseModel(pw.Model):
     class Meta:
         database = db
 
+GENDER = ( 
+          "undefined",
+          "female",
+          "male",
+          )
+
+class GenderField(pw.CharField):
+    def db_value(self,value):
+        if not value in GENDER:
+            raise TypeError("Wrong value, constrained to {GENDER}")
+        return super().adapt(value)
+
 class PermutationField(pw.TextField):
     def db_value(self,integer_list):
         string_list =  " ".join([str(n) for n in integer_list])
         return super().adapt(string_list)
+
     def python_value(self,string_list):
         return [int(n) for n in string_list.split()]
 
 class Participant(BaseModel):
     id = pw.AutoField(primary_key=True)
-    gender = pw.IntegerField(default=-1)
+    gender = GenderField(default="undefined")
     age = pw.IntegerField(default=0)
     consent = pw.BooleanField(default=False)
     date_created = pw.DateTimeField(default=datetime.now)
