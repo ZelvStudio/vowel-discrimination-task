@@ -11,6 +11,12 @@ class BaseModel(pw.Model):
     class Meta:
         database = db
 
+class PermutationField(pw.TextField):
+    def db_value(self,integer_list):
+        string_list =  " ".join([str(n) for n in integer_list])
+        return super().adapt(string_list)
+    def python_value(self,string_list):
+        return [int(n) for n in string_list.split()]
 
 class Participant(BaseModel):
     id = pw.AutoField(primary_key=True)
@@ -19,6 +25,7 @@ class Participant(BaseModel):
     consent = pw.BooleanField(default=False)
     date_created = pw.DateTimeField(default=datetime.now)
     completed = pw.BooleanField(default=False)
+    trial_permutation = PermutationField()
 
     @classmethod
     def is_completed(cls,session):
@@ -30,7 +37,7 @@ class Participant(BaseModel):
         query.execute()
 
     def __repr__(self):
-        return f'<Participant {self.id}> gender={self.gender}, age={self.age}, consent={self.consent}, date={self.date_created}, completed={self.completed}'
+        return f'<Participant {self.id}> trial_permutation={self.trial_permutation}, gender={self.gender}, age={self.age}, consent={self.consent}, date={self.date_created}, completed={self.completed}'
 
 
 class Trial(BaseModel):

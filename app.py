@@ -10,9 +10,10 @@ def index():
         gender = request.form['gender']
         age = request.form['age']
         consent = request.form['consent']
-        participant = Participant.create(gender=gender, age=age, consent=consent)
+        participant_trials = experiment.randomize()
+        participant = Participant.create(gender=gender, age=age, consent=consent, trial_permutation=participant_trials)
         session["id"] = participant.id
-        session["permutation"] = experiment.randomize()
+        session["permutation"] = participant_trials
         return redirect('/trial/0')
     else:
         return render_template('index.html')
