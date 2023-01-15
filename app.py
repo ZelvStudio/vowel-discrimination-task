@@ -42,7 +42,7 @@ def trial(n):
         else:
             return redirect(f'/trial/{next}')
     else:
-        return render_template('trial.html', vowels=vowels, sound_file=sound_file, n=n)
+        return render_template('trial.html', vowels=vowels, sound_file=sound_file, n=n, length=len(permutation))
 
 @app.route("/fin")
 def fin():
