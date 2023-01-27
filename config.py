@@ -5,7 +5,7 @@ import peewee
 EXPERIMENT = 'experiment.yaml'
 experiment = Experiment(EXPERIMENT)
 
-DATABASE = 'instance/test.db'
+DATABASE = 'instance/test_P5_D4_RT_003_cam.db'
 db = peewee.SqliteDatabase(DATABASE)
 
 app = Flask(__name__)
