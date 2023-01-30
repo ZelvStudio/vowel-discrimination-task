@@ -9,9 +9,10 @@ def index():
     if request.method == 'POST':
         gender = request.form['gender']
         age = request.form['age']
+        native = request.form['french-native']
         consent = request.form['consent']
         participant_trials = experiment.randomize()
-        participant = Participant.create(gender=gender, age=age, consent=consent, trial_permutation=participant_trials)
+        participant = Participant.create(gender=gender, age=age, native=native, consent=consent, trial_permutation=participant_trials)
         session["id"] = participant.id
         session["permutation"] = participant_trials
         return redirect('/trial/0')
