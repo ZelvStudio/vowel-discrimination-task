@@ -1,10 +1,30 @@
 import peewee as pw
 from datetime import datetime
 from config import db
+import os
 
 def create_tables():
     with db:
         db.create_tables([Participant,Trial])
+
+def delete_tables():
+    database_path = db.database
+    if not os.path.isfile(database_path):
+        print(f"{database_path} doesn't exist")
+        return
+
+    database_name = os.path.basename(database_path)
+    answer = input(f"Do you really want to delete {database_name}? All data will be lost (y/[n])? ")
+    match answer.lower():
+        case 'y':
+            os.remove(database_path)
+            if not os.path.isfile(database_path):
+                print(f"{database_name} has been deleted")
+            else:
+                print(f"Failed to delete {database_name}")
+        case _:
+            print("No changes were made")
+
 
 
 class BaseModel(pw.Model):
