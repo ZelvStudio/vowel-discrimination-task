@@ -30,7 +30,7 @@ def trial(n):
         abort(404)
 
     permutation = session["permutation"]
-    trial_index, sound_file, truth, vowels = experiment[permutation[n]]
+    trial_index, sound_file, truth, assist, vowels = experiment[permutation[n]]
     sound_file = url_for("static", filename=sound_file)
     if request.method == 'POST':
         answer = request.form['answer']
@@ -40,7 +40,7 @@ def trial(n):
             Trial.update(answer=answer).where(Trial.index==trial_index,
                                               Trial.participant==session["id"]).execute()
         else:
-            Trial.create(index=trial_index,participant=session["id"],truth=truth,answer=answer)
+            Trial.create(index=trial_index,participant=session["id"],truth=truth,answer=answer,assist=assist)
         next = n+1
         if next == len(permutation):
             Participant.complete(session)

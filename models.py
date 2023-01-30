@@ -58,6 +58,7 @@ class Trial(BaseModel):
     index = pw.IntegerField()
     truth = pw.CharField()
     answer = pw.CharField()
+    assist = pw.FloatField()
 
     def __repr__(self):
-        return f'<Trial {self.index}> participant={self.participant}, truth={self.truth}, answer={self.answer}'
+        return f'<Trial {self.index}> participant={self.participant}, truth={self.truth}, answer={self.answer}, assist={self.assist}'
