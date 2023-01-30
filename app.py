@@ -33,14 +33,26 @@ def trial(n):
     trial_index, sound_file, truth, assist, vowels = experiment[permutation[n]]
     sound_file = url_for("static", filename=sound_file)
     if request.method == 'POST':
-        answer = request.form['answer']
-        trial_aready_done = Trial.select().where(Trial.index==trial_index,
-                                                 Trial.participant==session["id"]).exists()
+        answer1 = request.form['answer1']
+        answer2 = request.form['answer2']
+        trial_aready_done = Trial.select()\
+                                 .where(Trial.index==trial_index,
+                                        Trial.participant==session["id"])\
+                                 .exists()
         if trial_aready_done:
-            Trial.update(answer=answer).where(Trial.index==trial_index,
-                                              Trial.participant==session["id"]).execute()
+            Trial.update(answer1=answer1,
+                         anwer2=answer2)\
+                 .where(Trial.index==trial_index,
+                        Trial.participant==session["id"])\
+                 .execute()
         else:
-            Trial.create(index=trial_index,participant=session["id"],truth=truth,answer=answer,assist=assist)
+            Trial.create(index=trial_index,
+                         participant=session["id"],
+                         file=sound_file,
+                         truth=truth,
+                         answer1=answer1,
+                         answer2=answer2,
+                         assist=assist)
         next = n+1
         if next == len(permutation):
             Participant.complete(session)

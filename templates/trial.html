@@ -9,7 +9,9 @@
 		<header class="w3-center w3-teal">
 			<h2><b>Trial {{n+1}}/{{length}}</b></h2>
 		</header>
-		<p>Sélectionnez la voyelle entendue dans la synthèse suivante</p>
+                <p>
+                Ecoutez l'enregistrement ci-dessous autant de fois que nécessaire.
+                </p>
 
 		<p>
 		<audio controls>
@@ -18,11 +20,29 @@
 		</audio>
 		</p>
 
+                <p>
+                Sélectionnez ensuite les deux voyelles les plus proches parmi les propositions suivantes.
+                </p>
+
+
 		<p>
-		{% for vowel in vowels %}
-		<input type="radio" id="{{vowel}}" name="answer" value="{{vowel}}" required>
-		<label for="{{vowel}}">{{vowel}}</label><br>
-		{% endfor %}
+                <div class="row">
+                    <div class="column">
+                        <h3><b>Principale</b></h3>
+                        {% for vowel in vowels %}
+                        <input type="radio" id="{{vowel}}" name="answer1" value="{{vowel}}" required>
+                        <label for="{{vowel}}">{{vowel}}</label><br>
+                        {% endfor %}
+                    </div>
+
+                    <div class="column">
+                        <h3><b>Alternative</b></h3>
+                        {% for vowel in vowels %}
+                        <input type="radio" id="{{vowel}}" name="answer2" value="{{vowel}}" required>
+                        <label for="{{vowel}}">{{vowel}}</label><br>
+                        {% endfor %}
+                    </div>
+                </div>
 		</p>
 
 		<p>
