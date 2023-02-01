@@ -50,7 +50,7 @@ def start():
 @registration_required
 def trial(n):
     # check the url is valid
-    if n < 0 or n >= len(experiment):
+    if n < 1 or n > len(experiment):
         abort(404)
 
     # i is the index used for indexing (starts at 0)
@@ -81,7 +81,7 @@ def trial(n):
                          answer2=answer2,
                          assist=assist)
         next = n+1
-        if next == len(permutation):
+        if next == len(permutation) + 1:
             Participant.complete(session)
             return redirect('/fin')
         else:
