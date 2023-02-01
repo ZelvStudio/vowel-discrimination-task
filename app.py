@@ -12,7 +12,7 @@ def registration_required(func):
         if not "id" in session:
             return redirect('/')
         elif Participant.is_completed(session):
-            return redirect('/fin')
+            return redirect('/end')
         return func(*args, **kwargs)
     return wrapper
 
@@ -83,12 +83,12 @@ def trial(n):
         next = n+1
         if next == len(permutation) + 1:
             Participant.complete(session)
-            return redirect('/fin')
+            return redirect('/end')
         else:
             return redirect(f'/trial/{next}')
     else:
         return render_template('trial.html', vowels=vowels, sound_file=sound_file, n=n, length=len(permutation))
 
-@app.route("/fin")
-def fin():
-    return render_template('fin.html')
+@app.route("/end")
+def end():
+    return render_template('end.html')
