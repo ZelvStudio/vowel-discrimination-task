@@ -1,7 +1,20 @@
 from flask import render_template, url_for, request, redirect, session, abort
+from functools import wraps
 
 from config import app, experiment
 from models import Participant, Trial
+
+
+def registration_required(func):
+    @wraps(func)
+    def wrapper(*args, **kwargs):
+        # check the Participant is valid
+        if not "id" in session:
+            return redirect('/')
+        elif Participant.is_completed(session):
+            return redirect('/fin')
+        return func(*args, **kwargs)
+    return wrapper
 
 
 @app.route("/", methods=['POST', 'GET'])
@@ -15,17 +28,21 @@ def index():
         participant = Participant.create(gender=gender, age=age, native=native, consent=consent, trial_permutation=participant_trials)
         session["id"] = participant.id
         session["permutation"] = participant_trials
-        return redirect('/trial/0')
+        return redirect('/start')
     else:
         return render_template('index.html')
 
+@app.route("/start", methods=['POST', 'GET'])
+@registration_required
+def start():
+    if request.method == 'POST':
+        return redirect('/trial/0')
+    else:
+        return render_template('start.html')
+
 @app.route("/trial/<int:n>", methods=['POST', 'GET'])
+@registration_required
 def trial(n):
-    # check the Participant is valid
-    if not "id" in session:
-        return redirect('/')
-    elif Participant.is_completed(session):
-        return redirect('/fin')
     # check the url is valid
     if n < 0 or n >= len(experiment):
         abort(404)
