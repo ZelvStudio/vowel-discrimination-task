@@ -1,6 +1,7 @@
 {% extends "base.html" %}
 
 {% block head %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/vowel-radio.css')}}">
 {% endblock %}
 
 {% block body %}
@@ -31,17 +32,25 @@
                 <div class="row">
                     <div class="column">
                         <h3><b>Plus proche</b></h3>
-                        {% for vowel in vowels %}
-                        <input type="radio" id="{{vowel}}" name="answer1" value="{{vowel}}" required>
-                        <label for="{{vowel}}">{{vowel}}</label><br>
-                        {% endfor %}
+			<div class="vowel-radio">
+				{% for vowel in vowels %}
+				<div>
+					<input type="radio" id="{{vowel}}_1" name="answer1" value="{{vowel}}" required>
+					<label for="{{vowel}}_1">
+						<span>
+							{{vowel}}
+						</span>
+					</label><br>
+				</div>
+				{% endfor %}
+			</div>
                     </div>
 
                     <div class="column">
                         <h3><b>Alternative</b></h3>
                         {% for vowel in vowels %}
-                        <input type="radio" id="{{vowel}}" name="answer2" value="{{vowel}}" required>
-                        <label for="{{vowel}}">{{vowel}}</label><br>
+                        <input type="radio" id="{{vowel}}_2" name="answer2" value="{{vowel}}" required>
+                        <label for="{{vowel}}_2">{{vowel}}</label><br>
                         {% endfor %}
                     </div>
                 </div>

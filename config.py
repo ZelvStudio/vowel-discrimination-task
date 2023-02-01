@@ -1,6 +1,7 @@
 from flask import Flask
 from data import Experiment
 import peewee
+import sass
 
 EXPERIMENT = 'experiments/experiment.yaml'
 experiment = Experiment(EXPERIMENT)
@@ -9,6 +10,9 @@ CONTACT = 'gael.le-godais@univ-grenoble-alpes.fr'
 
 DATABASE = 'instance/test_P5_D4_RT_003_cam.db'
 db = peewee.SqliteDatabase(DATABASE)
+
+# compile scss files into css folder
+sass.compile(dirname=('static/scss', 'static/css'), output_style='compressed')
 
 app = Flask(__name__)
 app.config.from_object(__name__)
