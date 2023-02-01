@@ -5,6 +5,8 @@ import peewee
 EXPERIMENT = 'experiments/experiment.yaml'
 experiment = Experiment(EXPERIMENT)
 
+CONTACT = 'gael.le-godais@univ-grenoble-alpes.fr'
+
 DATABASE = 'instance/test_P5_D4_RT_003_cam.db'
 db = peewee.SqliteDatabase(DATABASE)
 

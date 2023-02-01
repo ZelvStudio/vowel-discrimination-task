@@ -1,7 +1,7 @@
 from flask import render_template, url_for, request, redirect, session, abort
 from functools import wraps
 
-from config import app, experiment
+from config import app, experiment, CONTACT
 from models import Participant, Trial
 
 
@@ -36,7 +36,7 @@ def index():
         session["permutation"] = participant_trials
         return redirect('/start')
     else:
-        return render_template('index.html')
+        return render_template('index.html', contact=CONTACT)
 
 @app.route("/start", methods=['POST', 'GET'])
 @registration_required
@@ -91,4 +91,4 @@ def trial(n):
 
 @app.route("/end")
 def end():
-    return render_template('end.html')
+    return render_template('end.html', contact=CONTACT, participant_id=session["id"])
