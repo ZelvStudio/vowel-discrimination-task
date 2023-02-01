@@ -36,7 +36,7 @@ def index():
 @registration_required
 def start():
     if request.method == 'POST':
-        return redirect('/trial/0')
+        return redirect('/trial/1')
     else:
         return render_template('start.html')
 
@@ -47,8 +47,11 @@ def trial(n):
     if n < 0 or n >= len(experiment):
         abort(404)
 
+    # i is the index used for indexing (starts at 0)
+    i = n-1
+
     permutation = session["permutation"]
-    trial_index, sound_file, truth, assist, vowels = experiment[permutation[n]]
+    trial_index, sound_file, truth, assist, vowels = experiment[permutation[i]]
     sound_file = url_for("static", filename=sound_file)
     if request.method == 'POST':
         answer1 = request.form['answer1']
