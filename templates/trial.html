@@ -7,7 +7,7 @@
 <div class="w3-container w3-content w3-margin-top">
 	<form class="w3-container w3-card-3 w3-white w3-margin-top" action="/trial/{{n}}" method="POST" accept-charset="utf-8">
 		<header class="w3-center w3-teal">
-			<h2><b>Trial {{n}}/{{length}}</b></h2>
+			<h2><b>Test {{n}}/{{length}}</b></h2>
 		</header>
                 <p>
                 Ecoutez l'enregistrement ci-dessous autant de fois que nécessaire.
@@ -21,14 +21,16 @@
 		</p>
 
                 <p>
-                Sélectionnez ensuite les deux voyelles les plus proches parmi les propositions suivantes.
+                <!-- Sélectionnez ensuite les deux voyelles les plus proches parmi les propositions suivantes. -->
+		Sélectionnez ensuite parmi les voyelle proposées celle qui est la <b>plus proche</b> de l'enregistrement. <br>
+		Enfin, sélectionnez la seconde voyelle la plus proche parmi les propositions <b>alternatives</b>.
                 </p>
 
 
 		<p>
                 <div class="row">
                     <div class="column">
-                        <h3><b>Principale</b></h3>
+                        <h3><b>Plus proche</b></h3>
                         {% for vowel in vowels %}
                         <input type="radio" id="{{vowel}}" name="answer1" value="{{vowel}}" required>
                         <label for="{{vowel}}">{{vowel}}</label><br>
