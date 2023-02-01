@@ -68,7 +68,7 @@ def trial(n):
                                  .exists()
         if trial_aready_done:
             Trial.update(answer1=answer1,
-                         anwer2=answer2)\
+                         answer2=answer2)\
                  .where(Trial.index==trial_index,
                         Trial.participant==session["id"])\
                  .execute()
