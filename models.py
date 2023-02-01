@@ -57,6 +57,7 @@ class Participant(BaseModel):
     age = pw.IntegerField(default=0)
     native = pw.BooleanField(default=False)
     consent = pw.BooleanField(default=False)
+    name = pw.CharField(default="")
     date_created = pw.DateTimeField(default=datetime.now)
     completed = pw.BooleanField(default=False)
     trial_permutation = PermutationField()
@@ -71,7 +72,7 @@ class Participant(BaseModel):
         query.execute()
 
     def __repr__(self):
-        return f'<Participant {self.id}> trial_permutation={self.trial_permutation}, gender={self.gender}, age={self.age}, native={self.native}, consent={self.consent}, date={self.date_created}, completed={self.completed}'
+        return f'<Participant {self.id}: "{self.name}"> trial_permutation={self.trial_permutation}, gender={self.gender}, age={self.age}, native={self.native}, consent={self.consent}, date={self.date_created}, completed={self.completed}'
 
 
 class Trial(BaseModel):
