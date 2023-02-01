@@ -2,7 +2,7 @@ from flask import Flask
 from data import Experiment
 import peewee
 
-EXPERIMENT = 'experiment.yaml'
+EXPERIMENT = 'experiments/experiment.yaml'
 experiment = Experiment(EXPERIMENT)
 
 DATABASE = 'instance/test_P5_D4_RT_003_cam.db'
