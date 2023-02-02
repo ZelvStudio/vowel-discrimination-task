@@ -4,6 +4,8 @@ from config import db
 import os
 
 def create_tables():
+    if os.path.isfile(db.database):
+        raise FileExistsError(f'Database {db.database} already exists')
     with db:
         db.create_tables([Participant,Trial])
 

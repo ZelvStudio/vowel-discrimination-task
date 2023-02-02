@@ -2,10 +2,21 @@ from flask import render_template, url_for, request, redirect, session, abort
 from functools import wraps
 
 from config import app, experiment, CONTACT
-from models import Participant, Trial
+from models import Participant, Trial, create_tables
 
+@app.cli.command('initdb')
+def initdb_command():
+    try:
+        create_tables()
+        print('Initialized the database.')
+    except FileExistsError as error:
+        print(error)
 
 def registration_required(func):
+    """
+        decorator to check if the participant is registered and if she already
+        completed the test
+    """
     @wraps(func)
     def wrapper(*args, **kwargs):
         # check the Participant is valid
