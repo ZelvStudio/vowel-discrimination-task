@@ -59,14 +59,15 @@ def trial(n):
     permutation = session["permutation"]
     trial_index, sound_file, truth, assist, vowels = experiment[permutation[i]]
     sound_file = url_for("static", filename=sound_file)
+
+    trial = Trial.select()\
+                 .where(Trial.index==trial_index,
+                        Trial.participant==session["id"])
+    trial_already_done = trial.exists()
     if request.method == 'POST':
         answer1 = request.form['answer1']
         answer2 = request.form['answer2']
-        trial_aready_done = Trial.select()\
-                                 .where(Trial.index==trial_index,
-                                        Trial.participant==session["id"])\
-                                 .exists()
-        if trial_aready_done:
+        if trial_already_done:
             Trial.update(answer1=answer1,
                          answer2=answer2)\
                  .where(Trial.index==trial_index,
@@ -87,7 +88,16 @@ def trial(n):
         else:
             return redirect(f'/trial/{next}')
     else:
-        return render_template('trial.html', vowels=vowels, sound_file=sound_file, n=n, length=len(permutation))
+        checked1 = trial.get().answer1 if trial_already_done else None
+        checked2 = trial.get().answer2 if trial_already_done else None
+        return render_template('trial.html',
+                               vowels=vowels,
+                               sound_file=sound_file,
+                               n=n,
+                               length=len(permutation),
+                               checked1=checked1,
+                               checked2=checked2,
+                               )
 
 @app.route("/end")
 def end():

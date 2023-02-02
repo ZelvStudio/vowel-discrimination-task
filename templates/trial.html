@@ -36,7 +36,7 @@
 				<h3><b>Plus proche</b></h3>
 				{% for vowel in vowels %}
 				<div>
-					<input type="radio" id="{{vowel}}_1" name="answer1" value="{{vowel}}" required>
+					<input type="radio" id="{{vowel}}_1" name="answer1" value="{{vowel}}" {% if vowel is eq checked1 %} checked="checked" {% endif %} required>
 					<label for="{{vowel}}_1">
 						<span>
 							{{vowel}}
@@ -52,7 +52,7 @@
 				<h3><b>Seconde</b></h3>
 				{% for vowel in vowels %}
 				<div>
-					<input type="radio" id="{{vowel}}_2" name="answer2" value="{{vowel}}" required>
+					<input type="radio" id="{{vowel}}_2" name="answer2" value="{{vowel}}" {% if vowel is eq checked1 %} checked="checked" {% endif %} required>
 					<label for="{{vowel}}_2">
 						<span>
 							{{vowel}}
