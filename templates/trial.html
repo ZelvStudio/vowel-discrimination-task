@@ -11,20 +11,21 @@
 			<h2><b>Test {{n}}/{{length}}</b></h2>
 		</header>
                 <p>
-                Ecoutez l'enregistrement ci-dessous autant de fois que nécessaire.
+                Ecoutez l'enregistrement ci-dessous autant de fois que nécessaire:
                 </p>
 
 		<p>
-		<audio controls>
-			<source src="{{sound_file}}" type="audio/wav" preload=auto>
-			Votre navigateur ne supporte pas l'élément audio
-		</audio>
+		<div class="w3-center">
+			<audio controls>
+				<source src="{{sound_file}}" type="audio/wav" preload=auto>
+				Votre navigateur ne supporte pas l'élément audio
+			</audio>
+		</div>
 		</p>
 
                 <p>
                 <!-- Sélectionnez ensuite les deux voyelles les plus proches parmi les propositions suivantes. -->
-		Sélectionnez ensuite parmi les voyelle proposées celle qui est la <b>plus proche</b> de l'enregistrement. <br>
-		Enfin, sélectionnez la seconde voyelle la plus proche parmi les propositions <b>alternatives</b>.
+		Sélectionnez ensuite parmi les voyelle proposées celle qui est la <b>plus proche</b> de l'enregistrement, puis la <b>seconde</b> plus proche:
                 </p>
 
 
@@ -48,7 +49,7 @@
 
                     <div class="column">
 			<div class="vowel-radio">
-				<h3><b>Alternative</b></h3>
+				<h3><b>Seconde</b></h3>
 				{% for vowel in vowels %}
 				<div>
 					<input type="radio" id="{{vowel}}_2" name="answer2" value="{{vowel}}" required>
