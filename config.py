@@ -1,10 +1,10 @@
 from flask import Flask
 from data import Experiment
+import os
 import peewee
 import sass
 
 EXPERIMENT = 'experiments/experiment.yaml'
-experiment = Experiment(EXPERIMENT)
 
 CONTACT = 'gael.le-godais@univ-grenoble-alpes.fr'
 
@@ -28,3 +28,5 @@ def after_request(response):
     db.close()
     return response
 
+EXPERIMENT = os.path.join(app.root_path, EXPERIMENT)
+experiment = Experiment(EXPERIMENT)
