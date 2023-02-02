@@ -35,12 +35,9 @@ Should be ready to go!
 
 ## Running
 #### Create database
-Run `python` (or `python3` depending on your distribution) to open a python shell.
-Now create the database:
 
-```python
->>> from models import *
->>> create_tables()
+```
+python -m flask initdb
 ```
 
 #### Run local server in debug mode
