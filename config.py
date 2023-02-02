@@ -9,12 +9,17 @@ EXPERIMENT = 'experiments/experiment.yaml'
 CONTACT = 'gael.le-godais@univ-grenoble-alpes.fr'
 
 DATABASE = 'instance/test_P5_D4_RT_003_cam.db'
-db = peewee.SqliteDatabase(DATABASE)
 
 app = Flask(__name__)
 app.config.from_object(__name__)
 app.secret_key = "3urg0459"
 # session.permanent = True
+
+EXPERIMENT = os.path.join(app.root_path, EXPERIMENT)
+experiment = Experiment(EXPERIMENT)
+
+DATABASE = os.path.join(app.root_path, DATABASE)
+db = peewee.SqliteDatabase(DATABASE)
 
 @app.before_request
 def before_request():
@@ -25,8 +30,6 @@ def after_request(response):
     db.close()
     return response
 
-EXPERIMENT = os.path.join(app.root_path, EXPERIMENT)
-experiment = Experiment(EXPERIMENT)
 
 # compile scss files into css folder
 scss_dir = os.path.join(app.root_path, 'static/scss')
