@@ -5,13 +5,13 @@ Vowels:
   - i
   - o
   - u
+  - ou
   - é
   - è
-  - ou
   - an
   - on
   - in
-DataPath: data/ # relative path in static/ folder
+DataPath: data/test/ # relative path in static/ folder
 Sample: 2 # number of trials per participant
 Trials:
   - file: a.wav

@@ -8,7 +8,7 @@ EXPERIMENT = 'experiments/experiment.yaml'
 
 CONTACT = 'gael.le-godais@univ-grenoble-alpes.fr'
 
-DATABASE = 'instance/test_P5_D4_RT_003_cam.db'
+DATABASE = 'test_P5_D4_RT_003_cam.db'
 
 SECRET_KEY = '3urg0459'
 
@@ -20,7 +20,7 @@ app.secret_key = SECRET_KEY
 EXPERIMENT = os.path.join(app.root_path, EXPERIMENT)
 experiment = Experiment(EXPERIMENT)
 
-DATABASE = os.path.join(app.root_path, DATABASE)
+DATABASE = os.path.join(app.root_path, 'instance', DATABASE)
 db = peewee.SqliteDatabase(DATABASE)
 
 @app.before_request
