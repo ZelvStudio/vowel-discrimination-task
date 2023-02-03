@@ -10,9 +10,11 @@ CONTACT = 'gael.le-godais@univ-grenoble-alpes.fr'
 
 DATABASE = 'instance/test_P5_D4_RT_003_cam.db'
 
+SECRET_KEY = '3urg0459'
+
 app = Flask(__name__)
 app.config.from_object(__name__)
-app.secret_key = "3urg0459"
+app.secret_key = SECRET_KEY
 # session.permanent = True
 
 EXPERIMENT = os.path.join(app.root_path, EXPERIMENT)
