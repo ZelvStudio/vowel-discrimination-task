@@ -40,21 +40,6 @@ Should be ready to go!
 python -m flask initdb
 ```
 
-<details><summary>Deleting the database (required if you updated the data models)</summary>
-<p>
-
-Either delete your database file in `instance/` or run a `python` interpreter:
-```
-from models import *
-delete_tables()
-```
-
-Then recreate the database.
-
-</p>
-</details>
-
-
 #### Run local server in debug mode
 Start the server in debug mode by running 
 
@@ -107,3 +92,19 @@ The project follows a typical flask structure:
 - the html views are in `templates/`
 - the css styling is in `static/scss/` and `static/css/`
 - the databases are in `instance`
+
+<details><summary>Deleting the database (required if you updated the data models)</summary>
+<p>
+
+Either delete your database file in `instance/` or run a `python` interpreter:
+```
+from models import *
+delete_tables()
+```
+
+Then recreate the database.
+
+</p>
+</details>
+
+
