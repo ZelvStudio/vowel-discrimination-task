@@ -3,6 +3,7 @@ from functools import wraps
 
 from config import app, experiment, CONTACT
 from models import Participant, Trial, create_tables
+from peewee import DoesNotExist
 
 @app.cli.command('initdb')
 def initdb_command():
@@ -22,8 +23,14 @@ def registration_required(func):
         # check the Participant is valid
         if not "id" in session:
             return redirect('/')
-        elif Participant.is_completed(session):
-            return redirect('/end')
+
+        try:
+            if Participant.is_completed(session):
+                return redirect('/end')
+        except DoesNotExist as e:
+            session.clear()
+            return redirect('/')
+
         return func(*args, **kwargs)
     return wrapper
 
