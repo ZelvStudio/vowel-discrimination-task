@@ -54,10 +54,6 @@ As of 03/02/2023, we recommend using pythonanywhere.com which has a free tier an
 
 ## 🔧 Make your own experiment
 The recommended workflow is to create a new branch per experiment. Commits to the main branch should benefit to all experiments, i.e. mainly bug fixes. 
-Experiments branches should not be merged into main (in general). If you need to include in your branch some changes from main, just rebase your branch on main:
-```
-git rebase main
-```
 
 #### Create a new development branch (required)
 ```
