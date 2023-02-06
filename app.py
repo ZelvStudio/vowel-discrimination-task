@@ -117,6 +117,10 @@ def trial(n):
                                checked2=checked2,
                                )
 
+@app.route("/trial/<int:n>/back", methods=['POST', 'GET'])
+def previous_trial(n):
+    return redirect(f'/trial/{n-1}')
+
 @app.route("/end")
 def end():
     return render_template('end.html', contact=CONTACT, participant_id=session["id"])
