@@ -65,6 +65,8 @@ Now you can edit anything without messing up with the main branch.
 #### Add your data (required)
 Create a folder `static/data/<your-experiment>/` and copy the sound files of your trials in it.
 
+If you wish to play the ground truth sound when selecting a vowel, create a subfolder `static/data/<your-experiment>/truth/` and add a sound file for each vowel named '<vowel>.wav'.
+
 #### Create an experiment config file (required)
 Create a copy of `experiments/test.yaml` into `experiments/<your-experiment>.yaml` and edit it.
 The file should be self explanatory.

@@ -31,6 +31,7 @@ class Experiment:
             # we use BaseLoader otherwise 'on' vowel is loaded as True
         self.vowels = self.config['Vowels']
         self.data_path = self.config['DataPath']
+        self.truth_sound_files = [os.path.join(self.data_path,f'truth/{v}.wav') for v in self.vowels]
         self.sample_size = int(self.config['Sample'])
         self.trials = [Trial(n,
                              os.path.join(self.data_path,t['file']),
@@ -44,7 +45,7 @@ class Experiment:
         return [t.sort_index for t in sample(self.trials,k)]
 
     def __getitem__(self,n):
-        return *astuple(self.trials[n]), self.vowels
+        return *astuple(self.trials[n]), zip(self.vowels, self.truth_sound_files)
 
     def __len__(self):
         return len(self.trials)

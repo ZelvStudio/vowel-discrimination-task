@@ -77,6 +77,7 @@ def trial(n):
     permutation = session["permutation"]
     trial_index, sound_file, truth, assist, vowels = experiment[permutation[i]]
     sound_file = url_for("static", filename=sound_file)
+    vowels = [(vowel, url_for("static", filename=f)) for vowel, f in vowels]
 
     trial = Trial.select()\
                  .where(Trial.index==trial_index,
