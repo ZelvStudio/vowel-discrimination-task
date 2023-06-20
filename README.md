@@ -1,6 +1,6 @@
-# Vowel discrimination task
+# 👂 Vowel discrimination task
 
-## Installation
+## ⚙️ Installation
 #### Requirements
 
 This has been developped with `python3.10`, it does not work with older versions of Python 3. If necessary, install it from your package manager as well as `pip` for Python 3.
@@ -33,7 +33,7 @@ pip install -r requirements.txt
 
 Should be ready to go!
 
-## Running
+## 🏃 Running
 #### Create database
 
 ```
@@ -52,7 +52,7 @@ Open [localhost:5000](http://localhost:5000) in your favorite browser to access 
 #### Deploy
 As of 03/02/2023, we recommend using pythonanywhere.com which has a free tier and is easy to use.
 
-## Make your own experiment
+## 🔧 Make your own experiment
 The recommended workflow is to create a new branch per experiment. Commits to the main branch should benefit to all experiments, i.e. mainly bug fixes. 
 Experiments branches should not be merged into main (in general). If you need to include in your branch some changes from main, just rebase your branch on main:
 ```
@@ -66,7 +66,7 @@ git checkout <your-branch-name>
 ```
 Now you can edit anything without messing up with the main branch. 
 
-#### Add you data (required)
+#### Add your data (required)
 Create a folder `static/data/<your-experiment>/` and copy the sound files of your trials in it.
 
 #### Create an experiment config file (required)
