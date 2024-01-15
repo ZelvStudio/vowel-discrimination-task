@@ -8,7 +8,7 @@ This has been developped with `python3.10`, it does not work with older versions
 #### Clone git repo
 
 ```
-git clone git@github.com:ZelvStudio/vowel-discrimination-task.git
+git clone git@github.com:gaheldev/vowel-discrimination-task.git
 cd vowel-discrimination-task
 ```
 
