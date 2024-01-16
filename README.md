@@ -49,6 +49,16 @@ python -m flask --app app --debug run
 
 Open [localhost:5000](http://localhost:5000) in your favorite browser to access the website.
 
+#### Inspect database
+Check out [peewee's documentation](http://docs.peewee-orm.com/en/latest/peewee/querying.html) about making queries to the database.
+
+```
+from config import app, db, experiment
+from models import *
+participants = [p for p in Participant.select().dicts()] # get all participants
+trials = [p for p in Trial.select().dicts()] # get all trials
+```
+
 #### Deploy
 As of 03/02/2023, we recommend using pythonanywhere.com which has a free tier and is easy to use.
 
