@@ -52,7 +52,7 @@ Open [localhost:5000](http://localhost:5000) in your favorite browser to access 
 #### Inspect database
 Check out [peewee's documentation](http://docs.peewee-orm.com/en/latest/peewee/querying.html) about making queries to the database.
 
-```
+```python
 from config import app, db, experiment
 from models import *
 participants = [p for p in Participant.select().dicts()] # get all participants
@@ -86,7 +86,7 @@ The file should be self explanatory.
 #### Edit config.py (required)
 Open config.py and edit the configuration variables in all caps:
 
-```
+```python
 EXPERIMENT = 'experiments/<your-experiment>.yaml'
 CONTACT = '<your-mail-adress>'
 DATABASE = '<your-experiment.db>'
