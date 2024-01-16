@@ -26,9 +26,10 @@ def _get_assist(filename: str) -> float:
 
 class Experiment:
     def __init__(self,yaml_config):
+        # we use BaseLoader otherwise 'on' vowel is loaded as True
         with open(yaml_config) as f:
             self.config = yaml.load(f, yaml.loader.BaseLoader)
-            # we use BaseLoader otherwise 'on' vowel is loaded as True
+
         self.vowels = self.config['Vowels']
         self.data_path = self.config['DataPath']
         self.truth_sound_files = [os.path.join(self.data_path,f'truth/{v}.wav') for v in self.vowels]
