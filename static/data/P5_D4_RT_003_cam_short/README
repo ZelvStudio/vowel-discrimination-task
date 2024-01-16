@@ -1,0 +1,9 @@
+P5_D4_RT_003_cam -> online synthesis of vowels
+
+we used the cam sound as we failed to replay the actual recordings 
+
+bloc 004 has little repetitions and low quality sounds
+blocs 005, 006, 007 the mic barely captures the synthesis
+
+in truth folder we used vowels from BY2014 as the synthesizer was trained on it
+
