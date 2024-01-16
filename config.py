@@ -4,7 +4,7 @@ import os
 import peewee
 import sass
 
-EXPERIMENT = 'experiments/experiment.yaml'
+EXPERIMENT_NAME = 'experiment'
 
 CONTACT = 'gael.le-godais@univ-grenoble-alpes.fr'
 
@@ -17,7 +17,7 @@ app.config.from_object(__name__)
 app.secret_key = SECRET_KEY
 # session.permanent = True
 
-EXPERIMENT = os.path.join(app.root_path, EXPERIMENT)
+EXPERIMENT = os.path.join(app.root_path, 'experiments/', f'{EXPERIMENT_NAME}.yaml')
 experiment = Experiment(EXPERIMENT)
 
 DATABASE = os.path.join(app.root_path, 'instance', DATABASE)
