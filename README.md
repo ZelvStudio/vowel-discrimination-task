@@ -87,9 +87,9 @@ The file should be self explanatory.
 Open config.py and edit the configuration variables in all caps:
 
 ```python
-EXPERIMENT = 'experiments/<your-experiment>.yaml'
+EXPERIMENT_NAME = '<your-experiment>'
 CONTACT = '<your-mail-adress>'
-DATABASE = '<your-experiment.db>'
+DATABASE = '<your-experiment-database.db>'
 SECRET_KEY = '<a-random-sequence-of-characters>'
 ```
 
