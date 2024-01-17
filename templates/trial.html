@@ -42,11 +42,22 @@
         <p>
         <form action="/trial/{{n}}" method="POST" accept-charset="utf-8">
             <script>
+                var feedback = {% if vowel_feedback %} true {% else %} false {% endif %}
                 function play(vowel_id) {
-                    var audio = document.getElementById(vowel_id);
-                    audio.play();
+                    if (feedback) {
+                        var audio = document.getElementById(vowel_id);
+                        audio.play();
+                    }
                 }
             </script>
+
+            <p>
+            <div class="w3-center">
+                <input class='w3-check' type='checkbox' id='vowel_feedback' name='vowel_feedback' {% if vowel_feedback %} checked='checked' {% endif %} onclick='feedback = !feedback'>
+                <label for='vowel_feedback'> Jouer les voyelles de reference </>
+            </div>
+            </p>
+
             <div class="row">
                 <div class="column">
                     <div class="vowel-radio">

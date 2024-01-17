@@ -52,6 +52,7 @@ def index():
                                          trial_permutation=participant_trials)
         session["id"] = participant.id
         session["permutation"] = participant_trials
+        session["vowel_feedback"] = True
         return redirect('/start')
     else:
         return render_template('index.html', contact=CONTACT)
@@ -86,6 +87,13 @@ def trial(n):
     if request.method == 'POST':
         answer1 = request.form['answer1']
         answer2 = request.form['answer2']
+
+        # feedback checkbox only sends data if checked
+        try:
+            session['vowel_feedback'] = request.form['vowel_feedback'] == 'on'
+        except:
+            session['vowel_feedback'] = False
+
         if trial_already_done:
             Trial.update(answer1=answer1,
                          answer2=answer2)\
@@ -116,6 +124,7 @@ def trial(n):
                                length=len(permutation),
                                checked1=checked1,
                                checked2=checked2,
+                               vowel_feedback=session['vowel_feedback'],
                                )
 
 @app.route("/trial/<int:n>/back", methods=['POST', 'GET'])
