@@ -85,6 +85,7 @@ class Trial(BaseModel):
     assist = pw.FloatField()
     answer1 = pw.CharField()
     answer2 = pw.CharField()
+    feedback = pw.BooleanField()
 
     def __repr__(self):
-        return f'<Trial {self.index}> participant={self.participant}, truth={self.truth}, assist={self.assist}, answer1={self.answer1}, answer2={self.answer2}\n file={self.file}'
+        return f'<Trial {self.index}> participant={self.participant}, truth={self.truth}, assist={self.assist}, answer1={self.answer1}, answer2={self.answer2}, feedback={self.feedback}\n file={self.file}'

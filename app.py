@@ -96,7 +96,8 @@ def trial(n):
 
         if trial_already_done:
             Trial.update(answer1=answer1,
-                         answer2=answer2)\
+                         answer2=answer2,
+                         feedback=session['vowel_feedback'])\
                  .where(Trial.index==trial_index,
                         Trial.participant==session["id"])\
                  .execute()
@@ -107,7 +108,8 @@ def trial(n):
                          truth=truth,
                          answer1=answer1,
                          answer2=answer2,
-                         assist=assist)
+                         assist=assist,
+                         feedback=session['vowel_feedback'])
         next = n+1
         if next == len(permutation) + 1:
             Participant.complete(session)
