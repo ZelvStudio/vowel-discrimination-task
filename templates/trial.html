@@ -35,7 +35,7 @@
 
         <form action="/trial/{{n}}" method="POST" accept-charset="utf-8">
 
-            <input id="listens" type="hidden" name="listens" value="">
+            <input id="listens" type="hidden" name="listens" value="{{listens}}">
 
             <div class="row">
                 <div class="column">
@@ -46,7 +46,7 @@
                         <button type="button" class="vowel-button" onclick="play_stimulus()">
                             ?
                         </button>
-                        <input id="listen-count" type="hidden" name="listen_count" value="0">
+                        <input id="listen-count" type="hidden" name="listen_count" value="{{listen_count}}">
                         <audio id="synthesis" src="{{sound_file}}">
                     </div>
                 </div>
@@ -121,11 +121,11 @@
 </div>
 
 <script>
-    let listen_count = 0;
-    let listens = '';
-
     let listenCounter = document.getElementById('listen-count');
+    let listen_count = listenCounter.value;
+
     let listensTracker = document.getElementById('listens');
+    let listens = listensTracker.value;
 
     function add_listen(text) {
         if (listens != '') {
