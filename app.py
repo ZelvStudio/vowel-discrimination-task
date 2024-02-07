@@ -86,9 +86,14 @@ def trial(n):
     if request.method == 'POST':
         answer1 = request.form['answer1']
         answer2 = request.form['answer2']
+        listen_count = request.form['listen_count']
+        listens = request.form['listens']
         if trial_already_done:
             Trial.update(answer1=answer1,
-                         answer2=answer2)\
+                         answer2=answer2,
+                         listen_count=listen_count,
+                         listens=listens,
+                         )\
                  .where(Trial.index==trial_index,
                         Trial.participant==session["id"])\
                  .execute()
@@ -99,7 +104,10 @@ def trial(n):
                          truth=truth,
                          answer1=answer1,
                          answer2=answer2,
-                         assist=assist)
+                         assist=assist,
+                         listen_count=listen_count,
+                         listens=listens,
+                         )
         next = n+1
         if next == len(permutation) + 1:
             Participant.complete(session)

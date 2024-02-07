@@ -85,6 +85,8 @@ class Trial(BaseModel):
     assist = pw.FloatField()
     answer1 = pw.CharField()
     answer2 = pw.CharField()
+    listen_count = pw.IntegerField()
+    listens = pw.TextField()
 
     def __repr__(self):
-        return f'<Trial {self.index}> participant={self.participant}, truth={self.truth}, assist={self.assist}, answer1={self.answer1}, answer2={self.answer2}\n file={self.file}'
+        return f'<Trial {self.index}> participant={self.participant}, truth={self.truth}, assist={self.assist}, answer1={self.answer1}, answer2={self.answer2}, listen_count={self.listen_count}, listens={self.listens}\n file={self.file}'

@@ -33,44 +33,42 @@
 
         <p>
 
-        <script>
-            function play(vowel_id) {
-                var audio = document.getElementById(vowel_id);
-                audio.play();
-            }
-        </script>
-        <div class="row">
-            <div class="column">
-                <div class="w3-center">
-                    <br>
-                    <br>
-                    Stimulus: 
-                    <button type="button" class="vowel-button" onclick="play('synthesis')">
-                        ?
-                    </button>
-                    <audio id="synthesis" src="{{sound_file}}">
-                </div>
-            </div>
-
-            <div class="column">
-                <div class="vowel-buttons">
-                    {% for vowel, vowel_sound in vowels %}
-                    <div>
-                        <button type="button" class="vowel-button" onclick="play('{{vowel}}_sound')">
-                            {{vowel}}
-                        </button>
-                        <audio id="{{vowel}}_sound" src="{{vowel_sound}}">
-                    </div>
-                    {% endfor %}
-                </div>
-                <br>
-            </div>
-        </div>
-
-        </p>
-
-        <p>
         <form action="/trial/{{n}}" method="POST" accept-charset="utf-8">
+
+            <input id="listens" type="hidden" name="listens" value="">
+
+            <div class="row">
+                <div class="column">
+                    <div class="w3-center">
+                        <br>
+                        <br>
+                        Stimulus: 
+                        <button type="button" class="vowel-button" onclick="play_stimulus()">
+                            ?
+                        </button>
+                        <input id="listen-count" type="hidden" name="listen_count" value="0">
+                        <audio id="synthesis" src="{{sound_file}}">
+                    </div>
+                </div>
+
+                <div class="column">
+                    <div class="vowel-buttons">
+                        {% for vowel, vowel_sound in vowels %}
+                        <div>
+                            <button type="button" class="vowel-button" onclick="play('{{vowel}}_sound')">
+                                {{vowel}}
+                            </button>
+                            <audio id="{{vowel}}_sound" src="{{vowel_sound}}">
+                        </div>
+                        {% endfor %}
+                    </div>
+                    <br>
+                </div>
+            </div>
+
+            </p>
+
+            <p>
             <div class="row">
                 <div class="column">
                     <div class="vowel-radio">
@@ -106,19 +104,51 @@
                 </div>
             </div>
             <br>
-        </p>
+            </p>
 
+            <p>
+            <!-- Prevent implicit submission of the form -->
+            <button type="submit" disabled style="display: none" aria-hidden="true"></button>
+            <!-- ... -->
+            <div class="w3-center">
+                <input class="w3-button w3-center w3-section w3-teal w3-ripple" type="submit" value="Valider et continuer"/>
+            </div>
+            </p>
 
-        <p>
-        <!-- Prevent implicit submission of the form -->
-        <button type="submit" disabled style="display: none" aria-hidden="true"></button>
-        <!-- ... -->
-        <div class="w3-center">
-            <input class="w3-button w3-center w3-section w3-teal w3-ripple" type="submit" value="Valider et continuer"/>
-        </div>
-        </p>
         </form>
     </div>
     <br>
 </div>
+
+<script>
+    let listen_count = 0;
+    let listens = '';
+
+    let listenCounter = document.getElementById('listen-count');
+    let listensTracker = document.getElementById('listens');
+
+    function add_listen(text) {
+        if (listens != '') {
+            listens += ' '
+        }
+        listens += text;
+        listensTracker.value = listens;
+    }
+
+    function play(vowel_id) {
+        var audio = document.getElementById(vowel_id);
+        audio.play();
+        let vowel = vowel_id.replace('_sound', '');
+        add_listen(vowel);
+    }
+    
+    function play_stimulus() {
+        var audio = document.getElementById('synthesis');
+        audio.play();
+        listen_count++;
+        listenCounter.value = listen_count;
+        add_listen('?');
+    }
+</script>
+
 {% endblock %}
