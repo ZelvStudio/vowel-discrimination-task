@@ -117,6 +117,8 @@ def trial(n):
     else:
         checked1 = trial.get().answer1 if trial_already_done else None
         checked2 = trial.get().answer2 if trial_already_done else None
+        listen_count = trial.get().listen_count if trial_already_done else 0
+        listens = trial.get().listens if trial_already_done else ''
         return render_template('trial.html',
                                vowels=vowels,
                                sound_file=sound_file,
@@ -124,6 +126,8 @@ def trial(n):
                                length=len(permutation),
                                checked1=checked1,
                                checked2=checked2,
+                               listen_count=listen_count,
+                               listens=listens,
                                )
 
 @app.route("/trial/<int:n>/back", methods=['POST', 'GET'])
