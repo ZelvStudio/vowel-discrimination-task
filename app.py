@@ -118,7 +118,7 @@ def trial(n):
         checked1 = trial.get().answer1 if trial_already_done else None
         checked2 = trial.get().answer2 if trial_already_done else None
         listen_count = trial.get().listen_count if trial_already_done else 0
-        listens = trial.get().listens if trial_already_done else ''
+        listens = trial.get().listens + ' RELOAD' if trial_already_done else ''
         return render_template('trial.html',
                                vowels=vowels,
                                sound_file=sound_file,
