@@ -4,11 +4,11 @@ import os
 import peewee
 import sass
 
-EXPERIMENT_NAME = 'experiment'
+EXPERIMENT_NAME = 'P5_D4_RT_003_cam_short'
 
 CONTACT = 'gael.le-godais@univ-grenoble-alpes.fr'
 
-DATABASE = 'test_P5_D4_RT_003_cam.db'
+DATABASE = 'P5_D4_RT_003_cam_short.db'
 
 SECRET_KEY = '3urg0459'
 
