@@ -62,6 +62,7 @@ class Participant(BaseModel):
     name = pw.CharField(default="")
     date_created = pw.DateTimeField(default=datetime.now)
     completed = pw.BooleanField(default=False)
+    date_completed = pw.DateTimeField(default=datetime.now)
     trial_permutation = PermutationField()
 
     @classmethod
@@ -70,11 +71,11 @@ class Participant(BaseModel):
 
     @classmethod
     def complete(cls,session):
-        query = cls.update(completed=True).where(cls.id==session["id"])
+        query = cls.update(completed=True, date_completed=datetime.now()).where(cls.id==session["id"])
         query.execute()
 
     def __repr__(self):
-        return f'<Participant {self.id}: "{self.name}"> trial_permutation={self.trial_permutation}, gender={self.gender}, age={self.age}, native={self.native}, consent={self.consent}, date={self.date_created}, completed={self.completed}'
+        return f'<Participant {self.id}: "{self.name}"> trial_permutation={self.trial_permutation}, gender={self.gender}, age={self.age}, native={self.native}, consent={self.consent}, date_created={self.date_created}, completed={self.completed}, date_completed={self.date_completed}'
 
 
 class Trial(BaseModel):
