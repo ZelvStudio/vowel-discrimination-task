@@ -60,9 +60,24 @@ def index():
 @registration_required
 def start():
     if request.method == 'POST':
-        return redirect('/trial/1')
+        return redirect('/conditioning')
     else:
         return render_template('start.html')
+
+
+@app.route("/conditioning", methods=['POST', 'GET'])
+@registration_required
+def conditioning():
+    if request.method == 'POST':
+        return redirect('/trial/1')
+    else:
+        permutation = session["permutation"]
+        trial_index, sound_file, truth, assist, vowels = experiment[permutation[0]]
+        vowels = [(vowel, url_for("static", filename=f)) for vowel, f in vowels]
+        return render_template('conditioning.html',
+                               vowels=vowels,
+                               )
+
 
 @app.route("/trial/<int:n>", methods=['POST', 'GET'])
 @registration_required
