@@ -75,7 +75,7 @@
                         <h3><b>Plus proche</b></h3>
                         {% for vowel, vowel_sound in vowels %}
                         <div>
-                            <input type="radio" id="{{vowel}}_1" name="answer1" value="{{vowel}}" onclick="play('{{vowel}}_sound')" {% if vowel is eq checked1 %} checked="checked" {% endif %} required>
+                            <input type="radio" id="{{vowel}}_1" name="answer1" value="{{vowel}}" onclick="play_vowel_and_stimulus('{{vowel}}_sound')" {% if vowel is eq checked1 %} checked="checked" {% endif %} required>
                             <label for="{{vowel}}_1">
                                 <span>
                                     {{vowel}}
@@ -92,7 +92,7 @@
                         <h3><b>Seconde</b></h3>
                         {% for vowel, vowel_sound in vowels %}
                         <div>
-                            <input type="radio" id="{{vowel}}_2" name="answer2" value="{{vowel}}" onclick="play('{{vowel}}_sound')" {% if vowel is eq checked2 %} checked="checked" {% endif %} required>
+                            <input type="radio" id="{{vowel}}_2" name="answer2" value="{{vowel}}" onclick="play_stimulus_and_vowel('{{vowel}}_sound')" {% if vowel is eq checked2 %} checked="checked" {% endif %} required>
                             <label for="{{vowel}}_2">
                                 <span>
                                     {{vowel}}
@@ -137,18 +137,39 @@
 
     function play(vowel_id) {
         var audio = document.getElementById(vowel_id);
-        audio.play();
-        let vowel = vowel_id.replace('_sound', '');
-        add_listen(vowel);
+        return new Promise(res=>{
+            audio.play()
+            let vowel = vowel_id.replace('_sound', '');
+            add_listen(vowel);
+            audio.onended = res
+        })
     }
     
     function play_stimulus() {
         var audio = document.getElementById('synthesis');
-        audio.play();
-        listen_count++;
-        listenCounter.value = listen_count;
-        add_listen('?');
+        return new Promise(res=>{
+            audio.play()
+            listen_count++;
+            listenCounter.value = listen_count;
+            add_listen('?');
+            audio.onended = res
+        })
     }
+
+    function sleep(ms) {
+        return new Promise(resolve => setTimeout(resolve, ms));
+    }
+
+    async function play_stimulus_and_vowel(vowel_id) {
+        await play_stimulus()
+        sleep(200).then(() => { play(vowel_id); });
+    }
+
+    async function play_vowel_and_stimulus(vowel_id) {
+        await play(vowel_id)
+        sleep(200).then(() => { play_stimulus(); });
+    }
+    
 </script>
 
 {% endblock %}
