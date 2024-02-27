@@ -8,7 +8,7 @@ EXPERIMENT_NAME = 'P5_D4_RT_003_cam_short'
 
 CONTACT = 'gael.le-godais@univ-grenoble-alpes.fr'
 
-DATABASE = 'P5_D4_RT_003_cam_short_feedback.db'
+DATABASE = 'P5_D4_RT_003_cam_short_feedback_conditioning.db'
 
 SECRET_KEY = '3urg0459'
 
